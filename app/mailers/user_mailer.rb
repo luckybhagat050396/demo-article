@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
-    def welcome_email(user,password)
+    def welcome_email(user)
         @user = user
-        # @password = password
-        mail(to: @user.email, subject: 'Welcome Email')
+        mail(to: user.email, subject: 'Welcome Email')
     end
 end
+        

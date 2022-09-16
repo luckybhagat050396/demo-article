@@ -12,13 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   byebug
-  #   @user = User.new(user_params) 
-  #   after_save do |a|
-  #     UserMailer.welcome_email(resource,params[:user][:password]).deliver_now
-  #   # end
-  # end
+  #
 
   
 
@@ -27,22 +21,40 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.find_by(id: params[:id])
   end
 
+
+  # def new
+  #   @user = User.new
+  # end
+
+  # def create
+  #   byebug
+  #   @user= User.new(user_params)
+
+  #   if @user.save
+  #     UserMailer.welcome_email(@user).deliver_now
+  #     format.html { redirect_to(@user, notice: 'User was successfully created.') }
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
+
+
   # def new
   #   @user= User.find_by(id: params[:id])
   # end
 
   # def create
-  #   @user = User.new(user_params)
-  #   byebug
-  #   respond_to do |format|
-  #     if @user.save
-  #       # Tell the UserMailer to send a welcome email after save
-  #       UserMailer.welcome_email(resource,params[:user][:password]).deliver_now
-  #     else
-  #       format.html { render action: 'new' }
-        
-  #     end
-  #   end
+  #   super
+  #   # byebug
+  #   @user = User.new(user_params) 
+  #   UserMailer.welcome_email(@user).deliver_now
+  #   # Tell the UserMailer to send a welcome email after save
+  #   # UserMailer.welcome_email(resource,params[:user][:password]).deliver_now
+  # end
+
+  # private
+  # def user_params
+  #   params.require(:user).permit(:email,:encrypted_password,:password,:password_confirmation)
   # end
 
 
@@ -77,6 +89,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Replace the keys to fit your needs
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :current_password])
   end
+
+  # private
+  #   def user_params
+  #     params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+  #   end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
